@@ -4,9 +4,19 @@
   flex
   flex-col
   items-center
-  justify-cnter;
+  justify-center;
 }
 
 .card {
   @apply w-[400px];
+}
+
+.form {
+  @apply space-y-4;
+}
+
+.form_errors {
+  @apply text-red-500
+  text-sm
+  mt-1;
 }

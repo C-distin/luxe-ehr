@@ -78,15 +78,63 @@ export function SignUp() {
   }
 
   return (
-    <div className={styles.page}>
+    <section className={styles.page}>
       <motion.div variants={formVariants} initial="hidden" animate="visible">
         <Card className={styles.card}>
           <CardHeader>
             <CardTitle>Sign Up</CardTitle>
+            <CardDescription className={styles.card_description}>Create an account for the Luxe Clinic EHR System</CardDescription>
           </CardHeader>
-          <CardDescription>Create an account for the Luxe Clinic EHR System</CardDescription>
+          <CardContent>
+            <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
+              <motion.div variants={itemVariants}>
+                <Input
+                  placeholder="Name"
+                  {...register("name", { required: true })}
+                />
+                {errors.name && <p className={styles.form_errors}>{errors.name.message}</p>}
+              </motion.div>
+              <motion.div variants={itemVariants}>
+                <Input
+                  placeholder="Username"
+                  {...register("username", { required: true })}
+                />
+                {errors.username && <p className={styles.form_errors}>{errors.username.message}</p>}
+              </motion.div>
+              <motion.div variants={itemVariants}>
+                <Select onOpenChange={(value) => setValue("role", value)}>
+                  <SelectTrigger>
+                    <SelectValue placeholder="Role" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="admin">Admin</SelectItem>
+                    <SelectItem value="doctor">Doctor</SelectItem>
+                    <SelectItem value="nurse">Nurse</SelectItem>
+                    <SelectItem value="receptionist">Receptionist</SelectItem>
+                    <SelectItem value="lab">Lab Scientist</SelectItem>
+                    <SelectItem value="pharmacist">Pharmacist</SelectItem>
+                    <SelectItem value="radiologist">Radiologist</SelectItem>
+                  </SelectContent>
+                </Select>
+              </motion.div>
+              <motion.div variants={itemVariants}>
+                <Input type="password" placeholder="Password" {...register("password", { required: true })} />
+                {errors.password && <p className={styles.form_errors}>{errors.password.message}</p>}
+              </motion.div>
+              <motion.div variants={itemVariants}>
+                <Input type="password" placeholder="Confirm Password" {...register("confirmPassword", { required: true })} />
+                {errors.confirmPassword && <p className={styles.form_errors}>{errors.confirmPassword.message}</p>}
+              </motion.div>
+              <motion.div variants={itemVariants}>
+                <Button type="submit">Sign Up</Button>
+              </motion.div>
+            </form>
+          </CardContent>
+          <CardFooter>
+            {error && <p className={styles.form_errors}>{error}</p>}
+          </CardFooter>
         </Card>
       </motion.div>
-    </div>
+    </section>
   )
 }

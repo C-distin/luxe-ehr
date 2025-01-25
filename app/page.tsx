@@ -1,5 +1,9 @@
+import { SignUp } from "@/components/signup";
+
 export default function Home() {
   return (
-    <h1> Luxe Clinic EHR </h1>
+  <>
+      <SignUp />
+    </>
   );
 }
