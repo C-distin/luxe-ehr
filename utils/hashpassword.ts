@@ -1,22 +1,11 @@
-import bcrypt from "bcrypt";
-
-export async function hashPassword(password: string): Promise<string> {
-  try {
-    const saltRounds = 10;
-    const hashedPassword = await bcrypt.hash(password, saltRounds);
-    return hashedPassword;
-  } catch (error) {
-    console.error("Error hashing password:", error);
-    throw new Error("Failed to hash password");
-  }
+export async function HashPassword(password: string): Promise<string> {
+  return Bun.password.hash(password, {
+    algorithm: "argon2id",
+    memoryCost: 4096,
+    timeCost: 3,
+  })
 }
 
-export async function verifyPassword(password: string, hashedPassword: string): Promise<boolean> {
-  try {
-    const isMatch = await bcrypt.compare(password, hashedPassword);
-    return isMatch;
-  } catch (error) {
-    console.error("Error verifying password:", error);
-    throw new Error("Failed to verify password");
-  }
+export async function VerifyPassword( password: string, hash: string): Promise<boolean> {
+  return Bun.password.verify(password, hash)
 }
